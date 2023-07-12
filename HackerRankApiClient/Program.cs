@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace HackerRankApiClient
 {
@@ -46,68 +47,104 @@ namespace HackerRankApiClient
                 + "Enter " + " 3 ".Pastel(Color.Yellow).PastelBg(Color.Red) + " To Quit the Application." + Environment.NewLine;
         }
 
-        public async Task GetTopStories()
+        private void ActionHeader(string headerText)
         {
-            Console.WriteLine(Environment.NewLine + Environment.NewLine);
-            Console.WriteLine("=============   GET TOP STORIES - START   =====================".Pastel(Color.Lime));
-            Console.Write($"Enter numer n {"(0 < n < 200)".Pastel(Color.Yellow).PastelBg(Color.Maroon)} to get top n stories. n = ");
-            var input = Console.ReadLine();
-            int count;
-            if(int.TryParse(input, out count))
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine($"=============   {headerText.ToUpper()}   =====================".Pastel(Color.Lime));
+        }
+        private void ActionFooter(string footerText)
+        {            
+            Console.WriteLine("=============   {footerText.ToUpper()}   =====================".Pastel(Color.Lime));
+            Console.WriteLine(Environment.NewLine);
+        }
+
+        public async Task GetTopStories()
+        {            
+            using(HeaderFooter hf = new HeaderFooter("Get Top Stories"))
             {
-                using(HttpClient client = new HttpClient())
+                Console.Write($"Enter number n {"(0 < n < 200)".Pastel(Color.Yellow).PastelBg(Color.Maroon)} to get top n stories. n = ");
+                var input = Console.ReadLine();
+                int count;
+                if (int.TryParse(input, out count))
                 {
-                    var httpRespMsg = client.GetAsync("https://localhost:7268/api/HakerRank/GetTopStories/" + count)
-                        .ContinueWith(h => h.Result.Content.ReadAsStringAsync());                        
-                    while(!httpRespMsg.IsCompleted)
+                    using (HttpClient client = new HttpClient())
                     {
-                        Console.Write(".");
-                        Thread.Sleep(1000);
+                        var httpRespMsg = client.GetAsync("https://localhost:7268/api/HakerRank/GetTopStories/" + count)
+                            .ContinueWith(h => h.Result.Content.ReadAsStringAsync());
+                        while (!httpRespMsg.IsCompleted)
+                        {
+                            Console.Write(".");
+                            Thread.Sleep(1000);
+                        }
+                        Console.Out.WriteLine(Environment.NewLine);
+                        var context = httpRespMsg.Result.Result;
+                        var json = JsonValue.Parse(context).ToJsonString(new JsonSerializerOptions() { WriteIndented = true });
+                        Console.WriteLine(json.Pastel(Color.Green));
                     }
-                    Console.Out.WriteLine(Environment.NewLine);
-                    var context = httpRespMsg.Result.Result;
-                    var json = JsonValue.Parse(context).ToJsonString(new JsonSerializerOptions() { WriteIndented = true });                    
-                    Console.WriteLine(json.Pastel(Color.Green));
+                }
+                else
+                {
+                    Console.Out.WriteLine($"{input.Pastel(Color.Red)} is not a valid input!");
                 }
             }
-            else
-            {
-                Console.Out.WriteLine($"{input.Pastel(Color.Red)} is not a valid input!");
-            }
-            Console.WriteLine("=============   GET TOP STORIES - END     =====================".Pastel(Color.Lime));
-            Console.WriteLine(Environment.NewLine + Environment.NewLine);
         }
 
         public async Task GetStory()
-        {
-            Console.WriteLine(Environment.NewLine + Environment.NewLine);
-            Console.WriteLine("=============   GET STORY - START   =====================".Pastel(Color.Lime));
-            Console.Write($"Enter a story id for its details. id = ");
-            var input = Console.ReadLine();
-            int id;
-            if (int.TryParse(input, out id))
+        {            
+            using (HeaderFooter hf = new HeaderFooter("Get Story"))
             {
-                using (HttpClient client = new HttpClient())
+                Console.Write($"Enter a story id for its details. id = ");
+                var input = Console.ReadLine();
+                int id;
+                if (int.TryParse(input, out id))
                 {
-                    var httpRespMsg = client.GetAsync("https://localhost:7268/api/HakerRank/GetStory/" + id)
-                        .ContinueWith(h => h.Result.Content.ReadAsStringAsync());
-                    while (!httpRespMsg.IsCompleted)
+                    using (HttpClient client = new HttpClient())
                     {
-                        Console.Write(".");
-                        Thread.Sleep(1000);
+                        var httpRespMsg = client.GetAsync("https://localhost:7268/api/HakerRank/GetStory/" + id)
+                            .ContinueWith(h => h.Result.Content.ReadAsStringAsync());
+                        while (!httpRespMsg.IsCompleted)
+                        {
+                            Console.Write(".");
+                            Thread.Sleep(1000);
+                        }
+                        Console.Out.WriteLine(Environment.NewLine);
+                        var context = httpRespMsg.Result.Result;
+                        var json = JsonValue.Parse(context).ToJsonString(new JsonSerializerOptions() { WriteIndented = true });
+                        Console.WriteLine(json.Pastel(Color.Green));
                     }
-                    Console.Out.WriteLine(Environment.NewLine);
-                    var context = httpRespMsg.Result.Result;
-                    var json = JsonValue.Parse(context).ToJsonString(new JsonSerializerOptions() { WriteIndented = true });
-                    Console.WriteLine(json.Pastel(Color.Green));
                 }
-            }
-            else
-            {
-                Console.Out.WriteLine($"{input.Pastel(Color.Red)} is not a valid input!");
-            }
-            Console.WriteLine("=============   GET STORY - END     =====================".Pastel(Color.Lime));
-            Console.WriteLine(Environment.NewLine + Environment.NewLine);
+                else
+                {
+                    Console.Out.WriteLine($"{input.Pastel(Color.Red)} is not a valid input!");
+                }
+            }            
         }
     }
+
+    internal class HeaderFooter : IDisposable
+    {
+        private string _startmsg, _endmsg = string.Empty;
+        public HeaderFooter()
+        {
+            Start();
+        }
+        public HeaderFooter(string msg)
+        {
+            _startmsg = msg.ToUpper() + " - START ";
+            _endmsg = msg.ToUpper() + " - END ";
+            Start();
+        }
+
+        public void Start()
+        {
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine($"=============   {_startmsg}    =====================".Pastel(Color.Lime));            
+        }
+        public void Dispose()
+        {
+            Console.WriteLine($"=============   {_endmsg}    =====================".Pastel(Color.Lime));
+            Console.WriteLine(Environment.NewLine);
+        }
+    }
+
 }
