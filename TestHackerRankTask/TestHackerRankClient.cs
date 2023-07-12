@@ -31,7 +31,7 @@ namespace TestHackerRankTask
         {
             var ids = _hkWebClient.GetAllStoryIds();
             var firstId = ids.First();
-            Assert.That(_hkWebClient.GetStoryAsync(firstId), Is.Not.Null);
+            Assert.That(_hkWebClient.GetStoryAsync(firstId).Result, Is.Not.Null);
         }
 
         [TestCase(1)]
@@ -41,6 +41,16 @@ namespace TestHackerRankTask
         public void GetTopStories_ValidInput_ExecutesSuccessfully(int count)
         {
             var stories = _hkWebClient.GetTopStories(count);
+            Assert.That(stories.Count(), Is.EqualTo(count));
+        }
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(66)]
+        [TestCase(100)]
+        public void GetTopStoriesAsync_ValidInput_ExecutesSuccessfully(int count)
+        {
+            var stories = _hkWebClient.GetTopStoriesAsync(count).Result;
             Assert.That(stories.Count(), Is.EqualTo(count));
         }
     }
