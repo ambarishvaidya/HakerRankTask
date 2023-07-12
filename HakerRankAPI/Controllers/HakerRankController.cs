@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HackerRankClient;
+using HackerRankClient.Model;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HakerRankAPI.Controllers
 {
@@ -9,19 +11,19 @@ namespace HakerRankAPI.Controllers
         [HttpGet]
         public IEnumerable<int> GetAllStories()
         {
-            return Enumerable.Range(1, 200).ToArray();
+            return (new HackerRankWebClientImplementation()).GetAllStoryIdsAsync().Result;            
         }
 
         [HttpGet("GetTopStories/{count}")]
-        public IEnumerable<int> GetTopStories(int count)
+        public IEnumerable<Story> GetTopStories(int count)
         {
-            return Enumerable.Range(1, count);
+            return (new HackerRankWebClientImplementation()).GetTopStoriesAsync(count).Result;            
         }
 
         [HttpGet("GetStory/{id}")]
-        public IEnumerable<int> GetStory(int id)
+        public Story GetStory(int id)
         {
-            return new[] { id };
+            return (new HackerRankWebClientImplementation()).GetStoryAsync(id).Result;            
         }
     }
 }
