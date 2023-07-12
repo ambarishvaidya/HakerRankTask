@@ -13,35 +13,17 @@ namespace TestHackerRankTask
         }
 
         [Test]
-        public void GetAllStoryIds_ValidInput_ExecutesSuccessfully()
+        public void GetAllStoryIdsAsync_ValidInput_ExecutesSuccessfully()
         {
-            Assert.That(_hkWebClient.GetAllStoryIds().Any());
-        }
-
-        [Test]
-        public void GetStory_ValidInput_ExecutesSuccessfully()
-        {
-            var ids = _hkWebClient.GetAllStoryIds();
-            var firstId = ids.First();
-            Assert.That(_hkWebClient.GetStory(firstId), Is.Not.Null);
+            Assert.That(_hkWebClient.GetAllStoryIdsAsync().Result.Any());
         }
 
         [Test]
         public void GetStoryAsync_ValidInput_ExecutesSuccessfully()
         {
-            var ids = _hkWebClient.GetAllStoryIds();
+            var ids = _hkWebClient.GetAllStoryIdsAsync().Result;
             var firstId = ids.First();
             Assert.That(_hkWebClient.GetStoryAsync(firstId).Result, Is.Not.Null);
-        }
-
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(66)]
-        [TestCase(100)]
-        public void GetTopStories_ValidInput_ExecutesSuccessfully(int count)
-        {
-            var stories = _hkWebClient.GetTopStories(count);
-            Assert.That(stories.Count(), Is.EqualTo(count));
         }
 
         [TestCase(1)]

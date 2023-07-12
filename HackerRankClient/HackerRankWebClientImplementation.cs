@@ -19,16 +19,7 @@ namespace HackerRankClient
             _httpClient = httpClient;
         }
 
-        public IEnumerable<int> GetAllStoryIds()
-        {
-            HttpClient client = new HttpClient();
-            var response = client.GetAsync("https://hacker-news.firebaseio.com/v0/beststories.json").Result;
-            response.EnsureSuccessStatusCode();
-            string responseBody = response.Content.ReadAsStringAsync().Result;
-            var resp = JsonSerializer.Deserialize<int[]>(responseBody);
-            return resp;
-        }
-
+        
         public async Task<IEnumerable<int>> GetAllStoryIdsAsync()
         {
             try
@@ -40,16 +31,6 @@ namespace HackerRankClient
             {
                 return Array.Empty<int>();
             }            
-        }
-
-        public Story GetStory(int storyId)
-        {
-            HttpClient client = new HttpClient();
-            var response = client.GetAsync($"https://hacker-news.firebaseio.com/v0/item/{storyId}.json").Result;
-            response.EnsureSuccessStatusCode();
-            string responseBody = response.Content.ReadAsStringAsync().Result;
-            var resp = JsonSerializer.Deserialize<Story>(responseBody);
-            return resp;
         }
 
         public async Task<Story> GetStoryAsync(int storyId)
@@ -64,33 +45,6 @@ namespace HackerRankClient
             {
                 return new Story();
             }
-        }
-
-        public IEnumerable<Story> GetTopStories(int count)
-        {
-            var allids = GetAllStoryIds();
-            ConcurrentDictionary<int, List<Story>> storyDictionary = new ConcurrentDictionary<int, List<Story>>();
-            Parallel.ForEach(allids, (id) => 
-            {
-                Story story = GetStory(id);
-                storyDictionary.AddOrUpdate(story.score, 
-                    new List<Story>() { story }, 
-                    (k, v) => {
-                        v.Add(story);
-                        return v;
-                    });
-            });
-            var descendingOrder = storyDictionary.Keys.OrderByDescending(k => k);
-            Story[] stories = new Story[count];
-            int counter = 0;
-            foreach (int i in descendingOrder) 
-            {
-                stories[counter] = storyDictionary[i].First();
-                counter++;
-                if (counter >= count)
-                    break;
-            }
-            return stories;
         }
 
         public async Task<IEnumerable<Story>> GetTopStoriesAsync(int count)
