@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerRankClient", "HackerR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHackerRankTask", "TestHackerRankTask\TestHackerRankTask.csproj", "{B0E356CC-48E8-4B97-B7D4-521653C0B08B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerRankApiClient", "HackerRankApiClient\HackerRankApiClient.csproj", "{CE06D7D1-6779-40A7-BF78-1E1B84E726DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B0E356CC-48E8-4B97-B7D4-521653C0B08B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0E356CC-48E8-4B97-B7D4-521653C0B08B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0E356CC-48E8-4B97-B7D4-521653C0B08B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE06D7D1-6779-40A7-BF78-1E1B84E726DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE06D7D1-6779-40A7-BF78-1E1B84E726DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE06D7D1-6779-40A7-BF78-1E1B84E726DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE06D7D1-6779-40A7-BF78-1E1B84E726DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
