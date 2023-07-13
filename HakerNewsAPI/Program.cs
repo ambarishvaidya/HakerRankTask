@@ -1,5 +1,7 @@
 using HackerNewsClient;
+using HackerNewsClient.Cache;
 using HackerNewsClient.HttpImplementation;
+using HackerNewsClient.Util;
 
 namespace HackerNewsAPI
 {
@@ -17,14 +19,13 @@ namespace HackerNewsAPI
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddSingleton<ICommonOperations, CommonOperations>();
+            builder.Services.AddSingleton<IHackerNewsCache, HackerNewsCacheImpl>();
             builder.Services.AddScoped<IHttpHackerNews, HttpHackerNewsImpl>();
-            builder.Services.AddScoped<IHackerNewsWebClient, HackerNewsWebClientImpl>();
-
+            builder.Services.AddScoped<IHackerNewsWebClient, HackerNewsWebClientImpl>();            
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
-            
 
             var app = builder.Build();
 
@@ -36,12 +37,8 @@ namespace HackerNewsAPI
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
