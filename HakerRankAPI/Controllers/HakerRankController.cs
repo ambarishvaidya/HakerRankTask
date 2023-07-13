@@ -15,13 +15,13 @@ namespace HakerRankAPI.Controllers
         }
 
         [HttpGet("GetTopStories/{count}")]
-        public IEnumerable<Story> GetTopStories(int count)
+        public IEnumerable<StoryReadDto> GetTopStories(int count)
         {
             return (new HackerRankWebClientImplementation()).GetTopStoriesAsync(count).Result;            
         }
 
         [HttpGet("GetStory/{id}")]
-        public Story GetStory(int id)
+        public StoryReadDto GetStory(int id)
         {
             return (new HackerRankWebClientImplementation()).GetStoryAsync(id).Result;            
         }

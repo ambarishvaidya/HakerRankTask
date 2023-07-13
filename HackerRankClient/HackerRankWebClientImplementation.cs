@@ -1,13 +1,17 @@
-﻿using HackerRankClient.HttpImplementation;
+﻿using AutoMapper;
+using HackerRankClient.HttpImplementation;
 using HackerRankClient.Model;
-using System.Collections.Concurrent;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace HackerRankClient
 {
     public class HackerRankWebClientImplementation : IHackerRankWebClient
     {
+        private static IMapper Mapper;
+        static HackerRankWebClientImplementation()
+        {
+            Mapper = StoryProfile.Mapper;
+        }
+
         private IHttpHackerRank _httpClient;
         public HackerRankWebClientImplementation()
         {
@@ -19,7 +23,7 @@ namespace HackerRankClient
             _httpClient = httpClient;
         }
 
-        
+
         public async Task<IEnumerable<int>> GetAllStoryIdsAsync()
         {
             try
@@ -27,36 +31,37 @@ namespace HackerRankClient
                 var response = await _httpClient.GetAllStoryIdsAsync();
                 return response;
 
-            }catch(Exception oex)
+            }
+            catch (Exception oex)
             {
                 return Array.Empty<int>();
-            }            
+            }
         }
 
-        public async Task<Story> GetStoryAsync(int storyId)
+        public async Task<StoryReadDto> GetStoryAsync(int storyId)
         {
             try
             {
                 var response = await _httpClient.GetStoryAsync(storyId);
-                return response;
+                return Mapper.Map<StoryReadDto>(response);
 
             }
             catch (Exception oex)
             {
-                return new Story();
+                return new StoryReadDto();
             }
         }
 
-        public async Task<IEnumerable<Story>> GetTopStoriesAsync(int count)
+        public async Task<IEnumerable<StoryReadDto>> GetTopStoriesAsync(int count)
         {
             try
             {
                 var response = await _httpClient.GetTopStoriesAsync(count);
-                return response;
+                return Mapper.Map<IEnumerable<StoryReadDto>>(response);
             }
             catch (Exception oex)
             {
-                return Array.Empty<Story>();
+                return Array.Empty<StoryReadDto>();
             }
         }
     }
