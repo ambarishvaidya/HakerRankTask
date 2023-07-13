@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "HakerRankAPI": {
+    "HakerNewsAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

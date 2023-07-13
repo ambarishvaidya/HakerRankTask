@@ -8,11 +8,11 @@ namespace HackerNewsAPI.Controllers
     [ApiController]
     public class HackerNewsController : Controller
     {
-        private IHackerNewsWebClient hackerRankWebClient;
+        private IHackerNewsWebClient hackerNewsWebClient;
         private ILogger<HackerNewsController> _log;
         public HackerNewsController(IHackerNewsWebClient hkWebClient, ILogger<HackerNewsController> logger) 
         { 
-            hackerRankWebClient = hkWebClient;
+            hackerNewsWebClient = hkWebClient;
             _log = logger;
         }
         [HttpGet]
@@ -20,7 +20,7 @@ namespace HackerNewsAPI.Controllers
         {
             try
             {
-                return Ok(hackerRankWebClient.GetAllStoryIdsAsync().Result);
+                return Ok(hackerNewsWebClient.GetAllStoryIdsAsync().Result);
             }
             catch(Exception oex)
             {
@@ -34,7 +34,7 @@ namespace HackerNewsAPI.Controllers
         {
             try
             {
-                return Ok(hackerRankWebClient.GetTopStoriesAsync(count).Result);
+                return Ok(hackerNewsWebClient.GetTopStoriesAsync(count).Result);
             }
             catch (Exception oex)
             {
@@ -48,7 +48,7 @@ namespace HackerNewsAPI.Controllers
         {
             try
             {
-                return Ok(hackerRankWebClient.GetStoryAsync(id).Result);
+                return Ok(hackerNewsWebClient.GetStoryAsync(id).Result);
             }            
             catch (Exception oex)
             {
