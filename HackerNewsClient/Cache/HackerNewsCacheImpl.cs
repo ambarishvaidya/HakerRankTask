@@ -1,11 +1,8 @@
 ﻿using HackerNewsClient.Model;
 using HackerNewsClient.Util;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Security.Policy;
 
 namespace HackerNewsClient.Cache
 {
@@ -24,19 +21,19 @@ namespace HackerNewsClient.Cache
             _commonOperations = operations;
             _timer = new System.Timers.Timer();
             _timer.Elapsed += BuildCache;
-            isReady = false;            
+            isReady = false;
             _timer.Start();
             _log.LogInformation($"Timer started to build Cache.");
             _stopWatch = Stopwatch.StartNew();
         }
 
-        
+
         private void BuildCache(object? sender, System.Timers.ElapsedEventArgs e)
         {
             _stopWatch.Start();
             _timer.Stop();
             _data = _commonOperations.TopStoriesAsync().Result;
-            isReady = true;            
+            isReady = true;
             _stopWatch.Stop();
             _log.LogInformation($"PERF : BuildCache : {_stopWatch.Elapsed.TotalMilliseconds} ms");
             _timer.Interval = 1000;
