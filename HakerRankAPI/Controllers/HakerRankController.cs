@@ -9,9 +9,11 @@ namespace HakerRankAPI.Controllers
     public class HakerRankController : Controller
     {
         private IHackerRankWebClient hackerRankWebClient;
-        public HakerRankController(IHackerRankWebClient hkWebClient) 
+        private ILogger<HakerRankController> _log;
+        public HakerRankController(IHackerRankWebClient hkWebClient, ILogger<HakerRankController> logger) 
         { 
             hackerRankWebClient = hkWebClient;
+            _log = logger;
         }
         [HttpGet]
         public ActionResult<IEnumerable<int>> GetAllStories()
@@ -22,6 +24,7 @@ namespace HakerRankAPI.Controllers
             }
             catch(Exception oex)
             {
+                _log.LogError("Exception in GetAllStories. Ex - " + oex.Message + Environment.NewLine + "StackTrace - " + oex.StackTrace);
                 return BadRequest(oex.Message);
             }
         }
@@ -35,6 +38,7 @@ namespace HakerRankAPI.Controllers
             }
             catch (Exception oex)
             {
+                _log.LogError($"Exception in GetTopStories for {count}. Ex - " + oex.Message + Environment.NewLine + "StackTrace - " + oex.StackTrace);
                 return BadRequest(oex.Message);
             }
         }
@@ -48,6 +52,7 @@ namespace HakerRankAPI.Controllers
             }            
             catch (Exception oex)
             {
+                _log.LogError($"Exception in GetStory for {id}. Ex - " + oex.Message + Environment.NewLine + "StackTrace - " + oex.StackTrace);
                 return BadRequest(oex.Message);
             }
         }

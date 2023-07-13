@@ -1,16 +1,24 @@
 using HackerRankClient;
 using HackerRankClient.HttpImplementation;
+using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace TestHackerRankTask
 {
     public class Tests
     {
         private IHackerRankWebClient _hkWebClient_Good, _hkWebClient_Bad;
+        ILogger<HttpHackerRankImpl> httplogger;
+        ILogger<HackerRankWebClientImplementation> webClientlogger;
 
         [SetUp]
         public void Setup()
         {
-            _hkWebClient_Good = new HackerRankWebClientImplementation(new HttpHackerRankImpl("https://hacker-news.firebaseio.com/", "v0"));            
+            var log = LoggerFactory.Create(lb => lb.SetMinimumLevel(LogLevel.Trace));
+            httplogger = log.CreateLogger<HttpHackerRankImpl>();
+            webClientlogger = log.CreateLogger<HackerRankWebClientImplementation>();
+
+            _hkWebClient_Good = new HackerRankWebClientImplementation(new HttpHackerRankImpl("https://hacker-news.firebaseio.com/", "v0", httplogger), webClientlogger);            
         }
 
         [Test]
@@ -23,7 +31,7 @@ namespace TestHackerRankTask
         [TestCase("https://hacker-news.firebaseio.com/", "v")]        
         public void GetAllStoryIdsAsync_IncorrectUrlOrVersion_ThrowsException(string url, string version)
         {
-            _hkWebClient_Bad = new HackerRankWebClientImplementation(new HttpHackerRankImpl(url, version));
+            _hkWebClient_Bad = new HackerRankWebClientImplementation(new HttpHackerRankImpl(url, version, httplogger), webClientlogger);
             Assert.ThrowsAsync<Exception>(() => _hkWebClient_Bad.GetAllStoryIdsAsync());            
         }
 

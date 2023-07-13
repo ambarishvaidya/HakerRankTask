@@ -1,4 +1,6 @@
 ﻿using HackerRankClient.Model;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Text;
 using System.Text.Json;
@@ -18,12 +20,22 @@ namespace HackerRankClient.HttpImplementation
         private const char _slash = '/';
         private char[] _slashChar = new char[] { _slash };
 
+        private ILogger<HttpHackerRankImpl> _log;
+
         internal HttpHackerRankImpl(){ }
 
-        public HttpHackerRankImpl(string url, string version)
+        public HttpHackerRankImpl(string url, string version, ILogger<HttpHackerRankImpl> logger)
         {
             _url = url;
             _version = version;
+            _log = logger;
+            Setup();
+        }
+        public HttpHackerRankImpl(IConfiguration config, ILogger<HttpHackerRankImpl> logger)
+        {
+            _url = config["HackerNewsUrl"];
+            _version = config["HackerNewsApiVersion"];
+            _log = logger;
             Setup();
         }
 
@@ -34,6 +46,9 @@ namespace HackerRankClient.HttpImplementation
 
             _bestStoriesUrl = BuildBestStoriesUrl();
             _specificStoryUrl = BuildSpecificStoryUrl();
+
+            _log.LogInformation($"Best Stories URL {_bestStoriesUrl}");
+            _log.LogInformation($"Specific Story URL {_specificStoryUrl}" + " - {0} is replaced by the requested id.");
         }
 
         public string BuildUrl(params string[] values)
