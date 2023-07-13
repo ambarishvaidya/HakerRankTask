@@ -1,5 +1,6 @@
 ﻿using Pastel;
 using System.Drawing;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
@@ -78,7 +79,7 @@ namespace HackerNewsApiClient
                         var context = httpRespMsg.Result.Result;
                         try
                         {
-                            var json = JsonValue.Parse(context).ToJsonString(new JsonSerializerOptions() { WriteIndented = true });
+                            var json = GetPrettyJson(context);
                             Console.WriteLine(json.Pastel(Color.Green));
                         }
                         catch (Exception)
@@ -116,7 +117,7 @@ namespace HackerNewsApiClient
                         var context = httpRespMsg.Result.Result;
                         try
                         {
-                            var json = JsonValue.Parse(context).ToJsonString(new JsonSerializerOptions() { WriteIndented = true });
+                            string json = GetPrettyJson(context);
                             Console.WriteLine(json.Pastel(Color.Green));
                         }
                         catch (Exception)
@@ -130,6 +131,15 @@ namespace HackerNewsApiClient
                     Console.Out.WriteLine($"  {input.Pastel(Color.Yellow)} is not a valid input!".PastelBg(Color.Red));
                 }
             }
+        }
+
+        private string GetPrettyJson(string nonPrettyJson)
+        {
+            return JsonValue.Parse(nonPrettyJson).ToJsonString(new JsonSerializerOptions()
+            {
+                WriteIndented = true,
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            });
         }
     }
 
