@@ -9,15 +9,21 @@ namespace HakerRankAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            ConfigurationManager configuration = builder.Configuration;
+            var dataUrl = configuration.GetValue<string>("HackerNewsUrl");
+            var dataApiVersion = configuration.GetValue<string>("HackerNewsApiVersion");
+
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddScoped<IHttpHackerRank, HttpHackerRankImpl>(p => new HttpHackerRankImpl(dataUrl, dataApiVersion));
+            builder.Services.AddScoped<IHackerRankWebClient, HackerRankWebClientImplementation>();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddScoped<IHttpHackerRank, HttpHackerRankImpl>(p => new HttpHackerRankImpl("https://hacker-news.firebaseio.com/", "v0"));
-            builder.Services.AddScoped<IHackerRankWebClient, HackerRankWebClientImplementation>();
+            
 
             var app = builder.Build();
 
