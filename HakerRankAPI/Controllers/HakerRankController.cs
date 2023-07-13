@@ -14,21 +14,42 @@ namespace HakerRankAPI.Controllers
             hackerRankWebClient = hkWebClient;
         }
         [HttpGet]
-        public IEnumerable<int> GetAllStories()
+        public ActionResult<IEnumerable<int>> GetAllStories()
         {
-            return hackerRankWebClient.GetAllStoryIdsAsync().Result;            
+            try
+            {
+                return Ok(hackerRankWebClient.GetAllStoryIdsAsync().Result);
+            }
+            catch(Exception oex)
+            {
+                return BadRequest(oex.Message);
+            }
         }
 
         [HttpGet("GetTopStories/{count}")]
-        public IEnumerable<StoryReadDto> GetTopStories(int count)
+        public ActionResult<IEnumerable<StoryReadDto>> GetTopStories(int count)
         {
-            return hackerRankWebClient.GetTopStoriesAsync(count).Result;            
+            try
+            {
+                return Ok(hackerRankWebClient.GetTopStoriesAsync(count).Result);
+            }
+            catch (Exception oex)
+            {
+                return BadRequest(oex.Message);
+            }
         }
 
         [HttpGet("GetStory/{id}")]
-        public StoryReadDto GetStory(int id)
+        public ActionResult<StoryReadDto> GetStory(int id)
         {
-            return hackerRankWebClient.GetStoryAsync(id).Result;            
+            try
+            {
+                return Ok(hackerRankWebClient.GetStoryAsync(id).Result);
+            }            
+            catch (Exception oex)
+            {
+                return BadRequest(oex.Message);
+            }
         }
     }
 }

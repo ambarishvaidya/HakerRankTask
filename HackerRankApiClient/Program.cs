@@ -76,13 +76,20 @@ namespace HackerRankApiClient
                         }
                         Console.Out.WriteLine(Environment.NewLine);
                         var context = httpRespMsg.Result.Result;
-                        var json = JsonValue.Parse(context).ToJsonString(new JsonSerializerOptions() { WriteIndented = true });
-                        Console.WriteLine(json.Pastel(Color.Green));
+                        try
+                        {
+                            var json = JsonValue.Parse(context).ToJsonString(new JsonSerializerOptions() { WriteIndented = true });
+                            Console.WriteLine(json.Pastel(Color.Green));
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine(context.Pastel(Color.Red));
+                        }
                     }
                 }
                 else
                 {
-                    Console.Out.WriteLine($"{input.Pastel(Color.Red)} is not a valid input!");
+                    Console.Out.WriteLine($"  {input.Pastel(Color.Yellow)} is not a valid input!".PastelBg(Color.Red));
                 }
             }
         }
@@ -107,13 +114,20 @@ namespace HackerRankApiClient
                         }
                         Console.Out.WriteLine(Environment.NewLine);
                         var context = httpRespMsg.Result.Result;
-                        var json = JsonValue.Parse(context).ToJsonString(new JsonSerializerOptions() { WriteIndented = true });
-                        Console.WriteLine(json.Pastel(Color.Green));
+                        try
+                        {
+                            var json = JsonValue.Parse(context).ToJsonString(new JsonSerializerOptions() { WriteIndented = true });
+                            Console.WriteLine(json.Pastel(Color.Green));
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine(context.Pastel(Color.Red));
+                        }
                     }
                 }
                 else
                 {
-                    Console.Out.WriteLine($"{input.Pastel(Color.Red)} is not a valid input!");
+                    Console.Out.WriteLine($"  {input.Pastel(Color.Yellow)} is not a valid input!".PastelBg(Color.Red));
                 }
             }
         }

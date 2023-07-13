@@ -26,11 +26,14 @@ namespace HackerRankClient
             {
                 var response = await _httpClient.GetAllStoryIdsAsync();
                 return response;
-
             }
-            catch (Exception oex)
+            catch (HttpRequestException oex)
             {
-                return Array.Empty<int>();
+                throw new Exception("Incorrect DataURL. Contact Server Support!", oex);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -38,13 +41,21 @@ namespace HackerRankClient
         {
             try
             {
-            var response = await _httpClient.GetStoryAsync(storyId);
-            return Mapper.Map<StoryReadDto>(response);
+                if(storyId < 0)
+                    throw new ArgumentOutOfRangeException("StoryId has to be a positive number. ");
 
+                var response = await _httpClient.GetStoryAsync(storyId);
+                if (response == null)
+                    throw new ArgumentOutOfRangeException("No story for " + storyId.ToString() + ".");
+                return Mapper.Map<StoryReadDto>(response);
             }
-            catch (Exception oex)
+            catch (HttpRequestException oex)
             {
-                return new StoryReadDto();
+                throw new Exception("Incorrect DataURL. Contact Server Support!", oex);
+            }                        
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -52,12 +63,19 @@ namespace HackerRankClient
         {
             try
             {
+                if (count <= 0)
+                    throw new ArgumentOutOfRangeException("Count has to be a positive number greater than 0.");
+
                 var response = await _httpClient.GetTopStoriesAsync(count);
                 return Mapper.Map<IEnumerable<StoryReadDto>>(response);
             }
-            catch (Exception oex)
+            catch (HttpRequestException oex)
             {
-                return Array.Empty<StoryReadDto>();
+                throw new Exception("Incorrect DataURL. Contact Server Support!", oex);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }
