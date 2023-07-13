@@ -13,12 +13,8 @@ namespace HackerRankClient
         }
 
         private IHttpHackerRank _httpClient;
-        public HackerRankWebClientImplementation()
-        {
-            _httpClient = new HttpHackerRankImpl("https://hacker-news.firebaseio.com/", "v0");
-        }
-
-        internal HackerRankWebClientImplementation(IHttpHackerRank httpClient)
+        
+        public HackerRankWebClientImplementation(IHttpHackerRank httpClient)
         {
             _httpClient = httpClient;
         }
@@ -42,8 +38,8 @@ namespace HackerRankClient
         {
             try
             {
-                var response = await _httpClient.GetStoryAsync(storyId);
-                return Mapper.Map<StoryReadDto>(response);
+            var response = await _httpClient.GetStoryAsync(storyId);
+            return Mapper.Map<StoryReadDto>(response);
 
             }
             catch (Exception oex)

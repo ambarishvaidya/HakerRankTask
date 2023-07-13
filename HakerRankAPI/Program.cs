@@ -1,3 +1,6 @@
+using HackerRankClient;
+using HackerRankClient.HttpImplementation;
+
 namespace HakerRankAPI
 {
     public class Program
@@ -12,6 +15,9 @@ namespace HakerRankAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<IHttpHackerRank, HttpHackerRankImpl>(p => new HttpHackerRankImpl("https://hacker-news.firebaseio.com/", "v0"));
+            builder.Services.AddScoped<IHackerRankWebClient, HackerRankWebClientImplementation>();
 
             var app = builder.Build();
 

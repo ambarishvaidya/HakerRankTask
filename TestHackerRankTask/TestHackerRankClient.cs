@@ -1,4 +1,5 @@
 using HackerRankClient;
+using HackerRankClient.HttpImplementation;
 
 namespace TestHackerRankTask
 {
@@ -9,7 +10,7 @@ namespace TestHackerRankTask
         [SetUp]
         public void Setup()
         {
-            _hkWebClient = new HackerRankWebClientImplementation();
+            _hkWebClient = new HackerRankWebClientImplementation(new HttpHackerRankImpl("https://hacker-news.firebaseio.com/", "v0"));
         }
 
         [Test]
