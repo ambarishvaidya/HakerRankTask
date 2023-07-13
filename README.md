@@ -18,6 +18,11 @@ There RESTful methods
 1. GetTopStories(int count) - This will return the top **count** items in descending order of  their score.
 1. GetStory(int id) - Returns the Json formatted string for requested Id.
 
+### Assumptions
+* There are few stories having same score. I have taken the first in the list for displaying in top n.
+  _ If there are 3 stories for score 870, then the stories are added to a list, and I am simply taking the first item.
+* CommentCount is mapped to Decendants.
+
 ### Swagger
 ![Swagger UI](https://github.com/ambarishvaidya/HakerRankTask/assets/132093368/4b5447f3-14d9-4a7e-8f24-7940c1687e9b)
 
@@ -49,5 +54,13 @@ Using Swagger is simple.
 * Logging happens in the console that is launched when Solution is run.
 * Logging also is done to a file in **C:\temp\HackerNewsApiLogs**
 
-
-
+# Enhancements
+* Loading the cache when server loads.
+  _ Currently the cache is loaded on the first request.
+  _ A timer then keeps the cache udpated **CONTINUOUSLY** post 1 second sleep ***(NOT CONFIGURABLE)***.
+* Memory Profile the solution and optimize it for memory and performance.
+* Make changing text configurable.
+* More test cases
+* Add Mocking test cases
+* Benchmarking methods.
+* Better Naming conventions
