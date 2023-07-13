@@ -1,4 +1,4 @@
-﻿namespace HackerRankClient.Model
+﻿namespace HackerNewsClient.Model
 {
     public class Story
     {

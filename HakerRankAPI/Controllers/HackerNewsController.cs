@@ -1,16 +1,16 @@
-﻿using HackerRankClient;
-using HackerRankClient.Model;
+﻿using HackerNewsClient;
+using HackerNewsClient.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HakerRankAPI.Controllers
+namespace HackerNewsAPI.Controllers
 {
-    [Route("api/HakerRank")]
+    [Route("api/HackerNews")]
     [ApiController]
-    public class HakerRankController : Controller
+    public class HackerNewsController : Controller
     {
-        private IHackerRankWebClient hackerRankWebClient;
-        private ILogger<HakerRankController> _log;
-        public HakerRankController(IHackerRankWebClient hkWebClient, ILogger<HakerRankController> logger) 
+        private IHackerNewsWebClient hackerRankWebClient;
+        private ILogger<HackerNewsController> _log;
+        public HackerNewsController(IHackerNewsWebClient hkWebClient, ILogger<HackerNewsController> logger) 
         { 
             hackerRankWebClient = hkWebClient;
             _log = logger;

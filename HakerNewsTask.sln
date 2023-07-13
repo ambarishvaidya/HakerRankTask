@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HakerRankAPI", "HakerRankAPI\HakerRankAPI.csproj", "{49155777-8C92-4E6A-9778-687956CB358E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNewsAPI", "HakerRankAPI\HackerNewsAPI.csproj", "{49155777-8C92-4E6A-9778-687956CB358E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerRankClient", "HackerRankClient\HackerRankClient.csproj", "{1FC75346-3B6A-4712-83AD-BF6CCA6656DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNewsClient", "HackerRankClient\HackerNewsClient.csproj", "{1FC75346-3B6A-4712-83AD-BF6CCA6656DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHackerRankTask", "TestHackerRankTask\TestHackerRankTask.csproj", "{B0E356CC-48E8-4B97-B7D4-521653C0B08B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestHackerNewsTask", "TestHackerRankTask\TestHackerNewsTask.csproj", "{B0E356CC-48E8-4B97-B7D4-521653C0B08B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerRankApiClient", "HackerRankApiClient\HackerRankApiClient.csproj", "{CE06D7D1-6779-40A7-BF78-1E1B84E726DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerNewsApiClient", "HackerRankApiClient\HackerNewsApiClient.csproj", "{CE06D7D1-6779-40A7-BF78-1E1B84E726DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

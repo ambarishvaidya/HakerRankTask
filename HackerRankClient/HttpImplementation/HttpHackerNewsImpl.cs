@@ -1,13 +1,13 @@
-﻿using HackerRankClient.Model;
+﻿using HackerNewsClient.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Text;
 using System.Text.Json;
 
-namespace HackerRankClient.HttpImplementation
+namespace HackerNewsClient.HttpImplementation
 {
-    public class HttpHackerRankImpl : IHttpHackerRank
+    public class HttpHackerNewsImpl : IHttpHackerNews
     {
         private string _url;
         private string _version;
@@ -20,18 +20,18 @@ namespace HackerRankClient.HttpImplementation
         private const char _slash = '/';
         private char[] _slashChar = new char[] { _slash };
 
-        private ILogger<HttpHackerRankImpl> _log;
+        private ILogger<HttpHackerNewsImpl> _log;
 
-        internal HttpHackerRankImpl(){ }
+        internal HttpHackerNewsImpl(){ }
 
-        public HttpHackerRankImpl(string url, string version, ILogger<HttpHackerRankImpl> logger)
+        public HttpHackerNewsImpl(string url, string version, ILogger<HttpHackerNewsImpl> logger)
         {
             _url = url;
             _version = version;
             _log = logger;
             Setup();
         }
-        public HttpHackerRankImpl(IConfiguration config, ILogger<HttpHackerRankImpl> logger)
+        public HttpHackerNewsImpl(IConfiguration config, ILogger<HttpHackerNewsImpl> logger)
         {
             _url = config["HackerNewsUrl"];
             _version = config["HackerNewsApiVersion"];

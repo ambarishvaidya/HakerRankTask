@@ -1,23 +1,23 @@
 ﻿using AutoMapper;
-using HackerRankClient.HttpImplementation;
-using HackerRankClient.Model;
+using HackerNewsClient.HttpImplementation;
+using HackerNewsClient.Model;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
-namespace HackerRankClient
+namespace HackerNewsClient
 {
-    public class HackerRankWebClientImplementation : IHackerRankWebClient
+    public class HackerNewsWebClientImpl : IHackerNewsWebClient
     {
         private static IMapper Mapper;
-        static HackerRankWebClientImplementation()
+        static HackerNewsWebClientImpl()
         {
             Mapper = StoryProfile.Mapper;
         }
 
-        private IHttpHackerRank _httpClient;
-        private ILogger<HackerRankWebClientImplementation> _log;
+        private IHttpHackerNews _httpClient;
+        private ILogger<HackerNewsWebClientImpl> _log;
 
-        public HackerRankWebClientImplementation(IHttpHackerRank httpClient, ILogger<HackerRankWebClientImplementation> logger)
+        public HackerNewsWebClientImpl(IHttpHackerNews httpClient, ILogger<HackerNewsWebClientImpl> logger)
         {
             _httpClient = httpClient;
             _log = logger;

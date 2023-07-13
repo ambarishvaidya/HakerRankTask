@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HackerRankClient\HackerRankClient.csproj" />
+    <ProjectReference Include="..\HackerRankClient\HackerNewsClient.csproj" />
   </ItemGroup>
 
   <ItemGroup>

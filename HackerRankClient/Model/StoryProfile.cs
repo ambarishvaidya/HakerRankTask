@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace HackerRankClient.Model
+namespace HackerNewsClient.Model
 {
     public class StoryProfile : Profile
     {

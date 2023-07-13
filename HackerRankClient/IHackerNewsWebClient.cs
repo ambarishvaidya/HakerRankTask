@@ -1,8 +1,8 @@
-﻿using HackerRankClient.Model;
+﻿using HackerNewsClient.Model;
 
-namespace HackerRankClient
+namespace HackerNewsClient
 {
-    public interface IHackerRankWebClient
+    public interface IHackerNewsWebClient
     {
         Task<StoryReadDto> GetStoryAsync(int storyId);
         Task<IEnumerable<int>> GetAllStoryIdsAsync();

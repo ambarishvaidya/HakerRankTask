@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace HackerRankApiClient
+namespace HackerNewsApiClient
 {
     internal class Program
     {
@@ -67,7 +67,7 @@ namespace HackerRankApiClient
                 {
                     using (HttpClient client = new HttpClient())
                     {
-                        var httpRespMsg = client.GetAsync("https://localhost:7268/api/HakerRank/GetTopStories/" + count)
+                        var httpRespMsg = client.GetAsync("https://localhost:7268/api/HackerNews/GetTopStories/" + count)
                             .ContinueWith(h => h.Result.Content.ReadAsStringAsync());
                         while (!httpRespMsg.IsCompleted)
                         {
@@ -105,7 +105,7 @@ namespace HackerRankApiClient
                 {
                     using (HttpClient client = new HttpClient())
                     {
-                        var httpRespMsg = client.GetAsync("https://localhost:7268/api/HakerRank/GetStory/" + id)
+                        var httpRespMsg = client.GetAsync("https://localhost:7268/api/HackerNews/GetStory/" + id)
                             .ContinueWith(h => h.Result.Content.ReadAsStringAsync());
                         while (!httpRespMsg.IsCompleted)
                         {

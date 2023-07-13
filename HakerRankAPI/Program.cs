@@ -1,7 +1,7 @@
-using HackerRankClient;
-using HackerRankClient.HttpImplementation;
+using HackerNewsClient;
+using HackerNewsClient.HttpImplementation;
 
-namespace HakerRankAPI
+namespace HackerNewsAPI
 {
     public class Program
     {
@@ -17,8 +17,8 @@ namespace HakerRankAPI
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddScoped<IHttpHackerRank, HttpHackerRankImpl>();
-            builder.Services.AddScoped<IHackerRankWebClient, HackerRankWebClientImplementation>();
+            builder.Services.AddScoped<IHttpHackerNews, HttpHackerNewsImpl>();
+            builder.Services.AddScoped<IHackerNewsWebClient, HackerNewsWebClientImpl>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
