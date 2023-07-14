@@ -45,7 +45,7 @@ Using Swagger is simple.
 
 ### Console
 
-![Console](Imaages/Console01.png)
+![Console](Images/Console01.png)
 
 - The console is configured to talk to Web project at **https://localhost:7268**. Any changes to the URL will be required an update and rebuild of client.
 - Console will ask to execute
