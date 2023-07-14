@@ -6,7 +6,7 @@ Download the complete solution to your machine and Open it in VS2022.
 Update the Nuget packages and build.
 Right click on the solution **HakerNewsTask** and select **Properties**.
 Configure the items as shown in the figure and click Ok.
-![Multiple startup project configuration](\Images\SolutionStartup.png)
+![Multiple startup project configuration](/Images/SolutionStartup.png)
 
 Run the solution by running Ctrl + F5 or from the start button ![Run button](\Images\ProjectRun.png).
 
