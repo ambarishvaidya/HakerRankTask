@@ -75,3 +75,15 @@ Using Swagger is simple.
 - Add Mocking test cases
 - Benchmarking methods.
 - Better Naming conventions
+
+# Working Salient Points
+
+- Internal cache
+  - Cache is built on first request.
+  - The cache then is updated on a timer.
+  - All subsequent calls for **TOP n stories** are then returned from the cache.
+- AutoMapper is used to convert data from source to data required with required formatting - DTO
+- Request for individual stories for each id in the Top stories are executed in parallel.
+- Logs contains tokens **PERF** which provides information on methods performance. 
+- Known Disadvantage
+  - Request made for TOP n stories during building of cache will receive stale data.
