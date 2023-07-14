@@ -55,6 +55,7 @@ Using Swagger is simple.
 * Logging also is done to a file in **C:\temp\HackerNewsApiLogs**
 
 # Enhancements
+* From the Practices and patterns, an approach is to reuse HttpClient - https://www.aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/ but this is for a later time post rigorous testing.
 * Loading the cache when server loads.
   - Currently the cache is loaded on the first request.
   - A timer then keeps the cache udpated **CONTINUOUSLY** post 1 second sleep ***(NOT CONFIGURABLE)***.
