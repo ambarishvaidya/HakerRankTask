@@ -64,8 +64,9 @@ Using Swagger is simple.
 - Logging also is done to a file in **C:\temp\HackerNewsApiLogs**
 
 ## Stopping
-- Hit **Ctrl + C** in the console with logging.
+- Hit **Ctrl + C** in the console with logging - which hosts the application.
 - This will close the Broswer as well as the testing client (Console)
+- ![Stopping Console](Images/Stopping.png)
 
 # Enhancements
 
