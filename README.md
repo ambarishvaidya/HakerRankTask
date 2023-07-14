@@ -30,7 +30,7 @@ There RESTful methods
 
 ### Swagger
 
-![Swagger UI](https://github.com/ambarishvaidya/HakerRankTask/assets/132093368/4b5447f3-14d9-4a7e-8f24-7940c1687e9b)
+![Swagger UI](Images/Swagger.png)
 
 Using Swagger is simple.
 
@@ -45,7 +45,7 @@ Using Swagger is simple.
 
 ### Console
 
-![Console](https://github.com/ambarishvaidya/HakerRankTask/assets/132093368/657e7f09-dd4a-4710-b007-c43f33578470)
+![Console](Imaages/Console01.png)
 
 - The console is configured to talk to Web project at **https://localhost:7268**. Any changes to the URL will be required an update and rebuild of client.
 - Console will ask to execute
@@ -54,9 +54,9 @@ Using Swagger is simple.
   - **3** to Quit.
 - Following images shows sample input and output.
 
-- ![For top 2 stories](https://github.com/ambarishvaidya/HakerRankTask/assets/132093368/6aa69520-ff4f-4ac1-9240-118231124607)
+- ![For top 2 stories](Images/Console10.png)
 
-- ![For specific story](https://github.com/ambarishvaidya/HakerRankTask/assets/132093368/dab7e7aa-7650-4ab5-8a1f-0cf7714645bd)
+- ![For specific story](Images/Console20.png)
 
 ### Logs
 
