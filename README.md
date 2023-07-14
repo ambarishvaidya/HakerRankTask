@@ -8,7 +8,7 @@ Right click on the solution **HakerNewsTask** and select **Properties**.
 Configure the items as shown in the figure and click Ok.
 ![Multiple startup project configuration](/Images/SolutionStartup.png)
 
-Run the solution by running Ctrl + F5 or from the start button ![Run button](\Images\ProjectRun.png).
+Run the solution by running Ctrl + F5 or from the start button ![Run button](Images/ProjectRun.png).
 
 This will start the Web project at **https://localhost:7268** opening **swagger page in browser**, a **console log of web project** and a **console for Testing**.
 
