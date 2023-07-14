@@ -41,9 +41,9 @@ Using Swagger is simple.
 
 * The console is configured to talk to Web project at **https://localhost:7268**. Any changes to the URL will be required an update and rebuild of client.
 * Console will ask to execute
-  _ **1** for top **X** stories in descending order.
-  _ **2** for a specific story data
-  _ **3** to Quit.
+  - **1** for top **X** stories in descending order.
+  - **2** for a specific story data
+  - **3** to Quit.
 * Following images shows sample input and output.
 
 *  ![For top 2 stories](https://github.com/ambarishvaidya/HakerRankTask/assets/132093368/6aa69520-ff4f-4ac1-9240-118231124607)
@@ -56,8 +56,8 @@ Using Swagger is simple.
 
 # Enhancements
 * Loading the cache when server loads.
-  _ Currently the cache is loaded on the first request.
-  _ A timer then keeps the cache udpated **CONTINUOUSLY** post 1 second sleep ***(NOT CONFIGURABLE)***.
+  - Currently the cache is loaded on the first request.
+  - A timer then keeps the cache udpated **CONTINUOUSLY** post 1 second sleep ***(NOT CONFIGURABLE)***.
 * Memory Profile the solution and optimize it for memory and performance.
 * Make changing text configurable.
 * More test cases
