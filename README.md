@@ -63,6 +63,10 @@ Using Swagger is simple.
 - Logging happens in the console that is launched when Solution is run.
 - Logging also is done to a file in **C:\temp\HackerNewsApiLogs**
 
+## Stopping
+- Hit **Ctrl + C** in the console with logging.
+- This will close the Broswer as well as the testing client (Console)
+
 # Enhancements
 
 - From the Practices and patterns, an approach is to reuse HttpClient - https://www.aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/ but this is for a later time post rigorous testing.
