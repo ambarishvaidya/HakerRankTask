@@ -26,7 +26,7 @@ namespace HackerNewsApiClient
 
                     switch (input.Trim().ToUpper())
                     {
-                        case "1": GetTopStories(); break;
+                        case "1": GetTopStories(); Console.WriteLine("Babuji"); break;
                         case "2": GetStory(); break;
                         case "3": runTillQuit = false; break;
                         default:
@@ -65,28 +65,8 @@ namespace HackerNewsApiClient
                 var input = Console.ReadLine();
                 int count;
                 if (int.TryParse(input, out count))
-                {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        var httpRespMsg = client.GetAsync("https://localhost:7268/api/HackerNews/GetTopStories/" + count)
-                            .ContinueWith(h => h.Result.Content.ReadAsStringAsync());
-                        while (!httpRespMsg.IsCompleted)
-                        {
-                            Console.Write(".");
-                            Thread.Sleep(1000);
-                        }
-                        Console.Out.WriteLine(Environment.NewLine);
-                        var context = httpRespMsg.Result.Result;
-                        try
-                        {
-                            var json = GetPrettyJson(context);
-                            Console.WriteLine(json.Pastel(Color.Green));
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine(context.Pastel(Color.Red));
-                        }
-                    }
+                {                    
+                    await GetRequestsAsync("https://localhost:7268/api/HackerNews/GetTopStories/" + count);
                 }
                 else
                 {
@@ -104,27 +84,7 @@ namespace HackerNewsApiClient
                 int id;
                 if (int.TryParse(input, out id))
                 {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        var httpRespMsg = client.GetAsync("https://localhost:7268/api/HackerNews/GetStory/" + id)
-                            .ContinueWith(h => h.Result.Content.ReadAsStringAsync());
-                        while (!httpRespMsg.IsCompleted)
-                        {
-                            Console.Write(".");
-                            Thread.Sleep(1000);
-                        }
-                        Console.Out.WriteLine(Environment.NewLine);
-                        var context = httpRespMsg.Result.Result;
-                        try
-                        {
-                            string json = GetPrettyJson(context);
-                            Console.WriteLine(json.Pastel(Color.Green));
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine(context.Pastel(Color.Red));
-                        }
-                    }
+                    await GetRequestsAsync("https://localhost:7268/api/HackerNews/GetStory/" + id);
                 }
                 else
                 {
@@ -132,6 +92,45 @@ namespace HackerNewsApiClient
                 }
             }
         }
+
+        private async Task GetRequestsAsync(string url)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var responseTask = client.GetAsync(url);
+                PrintConsoleDots(responseTask, Color.Yellow);
+                var resp = await responseTask;
+                var respStringTask = responseTask.Result.Content.ReadAsStringAsync();
+                PrintConsoleDots(respStringTask, Color.GreenYellow);
+                var respString = await respStringTask;
+                Console.WriteLine(Environment.NewLine);
+                try
+                {
+                    var json = GetPrettyJson(respString);
+
+                    Console.WriteLine(url.Pastel(Color.Green));
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine(respString.Pastel(Color.Red));
+                }
+            }
+        }
+
+        private static void PrintConsoleDots(Task task)
+        {
+            PrintConsoleDots(task, Color.White);
+        }
+        private static void PrintConsoleDots(Task task, Color color)
+        {
+            while (!task.IsCompleted)
+            {
+                Console.Write(".".Pastel(color));
+                Thread.Sleep(1000);
+            }
+        }
+
+
 
         private string GetPrettyJson(string nonPrettyJson)
         {
