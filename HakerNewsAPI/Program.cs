@@ -14,10 +14,16 @@ namespace HackerNewsAPI
             builder.Logging.ClearProviders();
             builder.Logging.AddLog4Net();
 
-            ConfigurationManager configuration = builder.Configuration;            
+            ConfigurationManager configuration = builder.Configuration;
 
-            // Add services to the container.
-
+            builder.Services.AddCors(opt =>
+            {
+                opt.AddPolicy("XXX",
+                policy =>
+                {
+                    policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+                });
+            });
             builder.Services.AddControllers();
             builder.Services.AddSingleton<ICommonOperations, CommonOperations>();
             builder.Services.AddSingleton<IHackerNewsCache, HackerNewsCacheImpl>();
@@ -36,6 +42,7 @@ namespace HackerNewsAPI
                 app.UseSwaggerUI();
             }
 
+            app.UseCors("XXX");
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
