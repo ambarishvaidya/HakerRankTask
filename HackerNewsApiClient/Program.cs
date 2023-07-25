@@ -26,7 +26,7 @@ namespace HackerNewsApiClient
 
                     switch (input.Trim().ToUpper())
                     {
-                        case "1": GetTopStories(); Console.WriteLine("Babuji"); break;
+                        case "1": GetTopStories(); break;
                         case "2": GetStory(); break;
                         case "3": runTillQuit = false; break;
                         default:
@@ -108,7 +108,7 @@ namespace HackerNewsApiClient
                 {
                     var json = GetPrettyJson(respString);
 
-                    Console.WriteLine(url.Pastel(Color.Green));
+                    Console.WriteLine(json.Pastel(Color.Green));
                 }
                 catch (Exception)
                 {
