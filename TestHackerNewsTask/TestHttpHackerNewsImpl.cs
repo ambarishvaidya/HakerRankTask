@@ -20,7 +20,7 @@ namespace TestHackerNewsTask
         [TestCase(@"http://abc/v0/item/{0}.json", @" http://abc  ", "/v0/", "item", "{0}.json")]
         public void BuildUrl_ValidInputs_ExecutesSuccessfully(string expectedResp, params string[] tokens)
         {
-            var co = new CommonOperations("", "", operLogger);
+            var co = new CommonOperations("", "", operLogger, null);
             Assert.That(co.BuildUrl(tokens), Is.EqualTo(expectedResp));
         }
     }

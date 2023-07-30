@@ -11,7 +11,7 @@ namespace HackerNewsClient.Util
     {
         private IConfiguration _configuration;
         private ILogger<CommonOperations> _log;
-
+        private IHttpClientFactory _httpClientFactory;
         private string _url;
         private string _version;
 
@@ -23,16 +23,18 @@ namespace HackerNewsClient.Util
         private const char _slash = '/';
         private char[] _slashChar = new char[] { _slash };
 
-        public CommonOperations(string url, string version, ILogger<CommonOperations> logger)
+        public CommonOperations(string url, string version, ILogger<CommonOperations> logger, IHttpClientFactory httpClientFactory)
         {
-            _log = logger;            
+            _log = logger;
+            _httpClientFactory = httpClientFactory;
             _url = url;
             _version = version;
             Setup();
         }
-        public CommonOperations(IConfiguration config, ILogger<CommonOperations> logger)
+        public CommonOperations(IConfiguration config, ILogger<CommonOperations> logger, IHttpClientFactory httpClientFactory)
         {
             _log = logger;
+            _httpClientFactory = httpClientFactory;
             _configuration = config;
             _url = config["HackerNewsUrl"];
             _version = config["HackerNewsApiVersion"];
@@ -66,7 +68,7 @@ namespace HackerNewsClient.Util
 
         public async Task<IEnumerable<int>> TopStoryIdsAsync()
         {
-            using (HttpClient client = new HttpClient())
+            using (HttpClient client = _httpClientFactory.CreateClient())
             {
                 var response = await client.GetAsync(_bestStoriesUrl);
                 response.EnsureSuccessStatusCode();
@@ -77,7 +79,7 @@ namespace HackerNewsClient.Util
 
         public async Task<Story> GetStoryAsync(int id)
         {
-            using (HttpClient client = new HttpClient())
+            using (HttpClient client = _httpClientFactory.CreateClient())
             {
                 var url = string.Format(_specificStoryUrl, id);
                 var response = await client.GetAsync(url);

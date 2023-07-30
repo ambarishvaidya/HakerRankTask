@@ -24,6 +24,7 @@ namespace HackerNewsAPI
                     policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
                 });
             });
+            builder.Services.AddHttpClient();
             builder.Services.AddControllers();
             builder.Services.AddSingleton<ICommonOperations, CommonOperations>();
             builder.Services.AddSingleton<IHackerNewsCache, HackerNewsCacheImpl>();
