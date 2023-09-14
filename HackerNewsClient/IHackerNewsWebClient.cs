@@ -1,11 +1,10 @@
 ﻿using HackerNewsClient.Model;
 
-namespace HackerNewsClient
+namespace HackerNewsClient;
+
+public interface IHackerNewsWebClient
 {
-    public interface IHackerNewsWebClient
-    {
-        Task<StoryReadDto> GetStoryAsync(int storyId);
-        Task<IEnumerable<int>> GetAllStoryIdsAsync();
-        Task<IEnumerable<StoryReadDto>> GetTopStoriesAsync(int count);
-    }
+    Task<StoryReadDto> GetStoryAsync(int storyId);
+    Task<IEnumerable<int>> GetAllStoryIdsAsync();
+    Task<IEnumerable<StoryReadDto>> GetTopStoriesAsync(int count);
 }

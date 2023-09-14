@@ -1,11 +1,10 @@
 ﻿using HackerNewsClient.Model;
 using System.Collections.Concurrent;
 
-namespace HackerNewsClient.Cache
+namespace HackerNewsClient.Cache;
+
+public interface IHackerNewsCache
 {
-    public interface IHackerNewsCache
-    {
-        bool IsReady {  get; }
-        ConcurrentDictionary<int, List<Story>> Data { get; }
-    }
+    bool IsReady {  get; }
+    ConcurrentDictionary<int, List<Story>> Data { get; }
 }

@@ -1,11 +1,10 @@
 ﻿using HackerNewsClient.Model;
 
-namespace HackerNewsClient.HttpImplementation
+namespace HackerNewsClient.HttpImplementation;
+
+public interface IHttpHackerNews
 {
-    public interface IHttpHackerNews
-    {
-        Task<IEnumerable<int>> GetAllStoryIdsAsync();
-        Task<Story> GetStoryAsync(int id);
-        Task<IEnumerable<Story>> GetTopStoriesAsync(int count);
-    }
+    Task<IEnumerable<int>> GetAllStoryIdsAsync();
+    Task<Story> GetStoryAsync(int id);
+    Task<IEnumerable<Story>> GetTopStoriesAsync(int count);
 }
