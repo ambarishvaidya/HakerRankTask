@@ -16,14 +16,6 @@ public class Program
 
         ConfigurationManager configuration = builder.Configuration;
 
-        builder.Services.AddCors(opt =>
-        {
-            opt.AddPolicy("XXX",
-            policy =>
-            {
-                policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-            });
-        });
         builder.Services.AddHttpClient();
         builder.Services.AddControllers();
         builder.Services.AddSingleton<ICommonOperations, CommonOperations>();
@@ -43,7 +35,7 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        app.UseCors("XXX");
+        app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed(origin => true));
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();
